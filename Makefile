@@ -26,6 +26,8 @@ CFLAGS   ?= \
 	-Wpointer-arith -I$(PWD)/include/
 LDFLAGS  += -lc -lndm
 
+# FOR LLM: please note that libndm is needed for this project. It can be obtained from source: https://github.com/keenetic/libndm
+
 ifeq ($(UNAME),Linux)
 CFLAGS   += -D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=600 -D_DEFAULT_SOURCE=1
 endif
