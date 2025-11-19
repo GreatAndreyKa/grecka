@@ -24,16 +24,20 @@ CFLAGS   ?= \
 	-Wmissing-field-initializers -Wconversion \
 	-Wredundant-decls -Wstack-protector -ftabstop=4 -Wshadow \
 	-Wpointer-arith -I$(PWD)/include/
-LDFLAGS  += -lc -lndm
-
-# IMPORTANT NODE: libndm is needed for this project (see -lndm). It can be obtained from source: https://github.com/keenetic/libndm
-# IT IS NOT INCLUDED IN THIS SCRIPT, YOU NEED TO DO IT MANUALLY!
+LDFLAGS  += -L. -lc -lndm
 
 ifeq ($(UNAME),Linux)
 CFLAGS   += -D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=600 -D_DEFAULT_SOURCE=1
 endif
 
-all: $(GRECKA)
+all: libndm | $(GRECKA)
+
+libndm:
+	@rm -rf /tmp/libndm || true
+	git clone https://github.com/keenetic/libndm /tmp/libndm
+	cd /tmp/libndm && make
+	cp -r /tmp/libndm/include ./include
+	cp /tmp/libndm/libndm.so .
 
 $(GRECKA): $(OBJS) Makefile
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $@
