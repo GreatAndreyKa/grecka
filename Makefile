@@ -24,7 +24,7 @@ all: libndm | $(GRECKA)
 libndm:
 	@rm -rf /tmp/libndm || true
 	git clone https://github.com/keenetic/libndm /tmp/libndm
-	cd /tmp/libndm && make CPPFLAGS="-I/tmp/libndm/include"
+	cd /tmp/libndm && make CPPFLAGS="-I/tmp/libndm/include -D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=600 -D_DEFAULT_SOURCE=1"
 	cp -r /tmp/libndm/include ./include
 	cp /tmp/libndm/libndm.so .
 
@@ -36,4 +36,4 @@ clean:
 
 distclean: clean
 
-CPPFLAGS += -I$(CURDIR)/include
+CPPFLAGS += -I$(PWD)/include
