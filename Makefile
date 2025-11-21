@@ -24,7 +24,7 @@ all: libndm | $(GRECKA)
 libndm:
 	@rm -rf /tmp/libndm || true
 	git clone https://github.com/keenetic/libndm /tmp/libndm
-	cd /tmp/libndm && make
+	cd /tmp/libndm && make CPPFLAGS="-I/tmp/libndm/include"
 	cp -r /tmp/libndm/include ./include
 	cp /tmp/libndm/libndm.so .
 
