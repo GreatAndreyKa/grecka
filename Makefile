@@ -1,14 +1,3 @@
-# Copyright (c) 2012 NDM Systems, Inc. http://www.ndmsystems.com/
-# This software is freely distributable, see COPYING for details.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-# DEALINGS IN THE SOFTWARE.
-
 .PHONY: all clean distclean
 
 GRECKA    = greckad
@@ -35,7 +24,7 @@ all: libndm | $(GRECKA)
 libndm:
 	@rm -rf /tmp/libndm || true
 	git clone https://github.com/keenetic/libndm /tmp/libndm
-	cd /tmp/libndm && make
+	cd /tmp/libndm && make CPPFLAGS="-I/tmp/libndm/include"
 	cp -r /tmp/libndm/include ./include
 	cp /tmp/libndm/libndm.so .
 
